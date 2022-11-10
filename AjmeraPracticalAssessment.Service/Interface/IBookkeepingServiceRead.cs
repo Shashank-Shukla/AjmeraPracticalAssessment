@@ -7,7 +7,7 @@ namespace AjmeraPracticalAssessment.Service.Interface
 {
     public interface IBookkeepingServiceRead
     {
-        BookkeeperRead GetBookDetailById();
+        BookkeeperRead GetBookDetailById(string id);
         List<BookkeeperRead> GetAllBookDetails();
     }
 }

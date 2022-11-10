@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.Repository", "..\AjmeraPracticalAssessment.Repository\AjmeraPracticalAssessment.Repository.csproj", "{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.HealthCheckAPI", "..\AjmeraPracticalAssessment.HealthCheckAPI\AjmeraPracticalAssessment.HealthCheckAPI.csproj", "{A4CAD36B-6CCC-4F16-B4C3-07702E35224C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4CAD36B-6CCC-4F16-B4C3-07702E35224C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4CAD36B-6CCC-4F16-B4C3-07702E35224C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4CAD36B-6CCC-4F16-B4C3-07702E35224C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4CAD36B-6CCC-4F16-B4C3-07702E35224C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

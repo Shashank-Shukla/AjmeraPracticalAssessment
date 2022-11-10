@@ -90,7 +90,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         {
             try
             {
-                BookkeeperRead bookkeeperReads = bookkeepingServiceRead.GetBookDetailById();
+                BookkeeperRead bookkeeperReads = bookkeepingServiceRead.GetBookDetailById(id);
 
                 return Ok(new ControllerResponse
                 {

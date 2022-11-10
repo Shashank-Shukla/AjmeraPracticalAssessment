@@ -47,11 +47,11 @@ namespace AjmeraPracticalAssessment.Service
         /// </summary>
         /// <returns>BookkeeperRead object</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public BookkeeperRead GetBookDetailById()
+        public BookkeeperRead GetBookDetailById(string id)
         {
             try
             {
-                BookkeeperRead repoResponse = bookkeepingRepositoryRead.GetBookDetailById();
+                BookkeeperRead repoResponse = bookkeepingRepositoryRead.GetBookDetailById(id);
                 repoResponse = FilterRepoResponse(repoResponse);
                 return repoResponse;
             }

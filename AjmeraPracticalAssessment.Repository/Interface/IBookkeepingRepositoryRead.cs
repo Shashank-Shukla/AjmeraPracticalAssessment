@@ -8,6 +8,6 @@ namespace AjmeraPracticalAssessment.Repository.Interface
     public interface IBookkeepingRepositoryRead
     {
         List<BookkeeperRead> GetAllBookDetails();
-        BookkeeperRead GetBookDetailById();
+        BookkeeperRead GetBookDetailById(string id);
     }
 }
