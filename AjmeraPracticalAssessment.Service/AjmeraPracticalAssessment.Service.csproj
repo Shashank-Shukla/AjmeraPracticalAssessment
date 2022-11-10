@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AjmeraPracticalAssessment.Contracts\AjmeraPracticalAssessment.Contracts.csproj" />
+    <ProjectReference Include="..\AjmeraPracticalAssessment.Repository\AjmeraPracticalAssessment.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using AjmeraPracticalAssessment.Contracts.Read;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AjmeraPracticalAssessment.Repository.Interface
 {
-    internal interface IBookkeepingRepositoryRead
+    public interface IBookkeepingRepositoryRead
     {
+        List<BookkeeperRead> GetAllBookDetails();
+        BookkeeperRead GetBookDetailById();
     }
 }

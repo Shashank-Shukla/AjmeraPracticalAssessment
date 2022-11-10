@@ -1,13 +1,27 @@
 ﻿using AjmeraPracticalAssessment.Contracts.Read;
+using AjmeraPracticalAssessment.Repository.Interface;
 using AjmeraPracticalAssessment.Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace AjmeraPracticalAssessment.Service
 {
     public class BookkeepingServiceRead : IBookkeepingServiceRead
     {
+        #region Private Variable
+        private IBookkeepingRepositoryRead bookkeepingRepositoryRead;
+        #endregion
+
+        #region Constructor
+        public BookkeepingServiceRead(IBookkeepingRepositoryRead bookkeepingRepositoryRead)
+        {
+            this.bookkeepingRepositoryRead = bookkeepingRepositoryRead;
+        }
+        #endregion
+
+        #region Public Methods
         /// <summary>
         /// Returns all the books in book keeping DB
         /// </summary>
@@ -17,18 +31,15 @@ namespace AjmeraPracticalAssessment.Service
         {
             try
             {
-
+                List<BookkeeperRead> repoResponse = bookkeepingRepositoryRead.GetAllBookDetails();
+                repoResponse = FilterRepoResponse(repoResponse);
+                return repoResponse;
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw new Exception(ex.Message);
             }
-            finally 
-            {
-                //
-            }
-            return new List<BookkeeperRead>();
         }
 
         /// <summary>
@@ -40,13 +51,48 @@ namespace AjmeraPracticalAssessment.Service
         {
             try
             {
-                return new BookkeeperRead();
+                BookkeeperRead repoResponse = bookkeepingRepositoryRead.GetBookDetailById();
+                repoResponse = FilterRepoResponse(repoResponse);
+                return repoResponse;
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw new Exception(ex.Message);
             }
         }
+        #endregion
+
+        #region Private Methods
+        private List<BookkeeperRead> FilterRepoResponse(List<BookkeeperRead> repoResponse)
+        {
+            foreach (BookkeeperRead item in repoResponse)
+            {
+                if (string.IsNullOrEmpty(item.BookName))
+                {
+                    item.BookName = "NA";
+                }
+                if (string.IsNullOrEmpty(item.AuthorName))
+                {
+                    item.AuthorName = "NA";
+                }
+            }
+
+            return repoResponse;
+        }
+
+        private BookkeeperRead FilterRepoResponse(BookkeeperRead repoResponse)
+        {
+            if (string.IsNullOrEmpty(repoResponse.BookName))
+            {
+                repoResponse.BookName = "NA";
+            }
+            if (string.IsNullOrEmpty(repoResponse.AuthorName))
+            {
+                repoResponse.AuthorName = "NA";
+            }
+            return repoResponse;
+        }
+        #endregion
     }
 }

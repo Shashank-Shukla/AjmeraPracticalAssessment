@@ -12,5 +12,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AjmeraPracticalAssessment.Contracts\AjmeraPracticalAssessment.Contracts.csproj" />
+    <ProjectReference Include="..\AjmeraPracticalAssessment.Service\AjmeraPracticalAssessment.Service.csproj" />
+  </ItemGroup>
+
 
 </Project>

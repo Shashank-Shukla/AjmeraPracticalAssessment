@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AjmeraPracticalAssessment.Repository.Interface
 {
-    internal interface IBookkeepingRepositoryWrite
+    public interface IBookkeepingRepositoryWrite
     {
     }
 }

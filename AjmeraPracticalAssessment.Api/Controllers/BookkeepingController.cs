@@ -1,5 +1,6 @@
 ﻿using AjmeraPracticalAssessment.Contracts.Read;
 using AjmeraPracticalAssessment.Contracts.ReturnObject;
+using AjmeraPracticalAssessment.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -44,6 +45,17 @@ namespace AjmeraPracticalAssessment.Api.Controllers
 
         #region Private variables
         //private ControllerResponse controllerResponse = null;
+        private IBookkeepingServiceRead bookkeepingServiceRead;
+        private IBookkeepingServiceWrite bookkeepingServiceWrite;
+        #endregion
+
+        #region Constructor
+        public BookkeepingController(IBookkeepingServiceRead bookkeepingServiceRead, 
+                                    IBookkeepingServiceWrite bookkeepingServiceWrite)
+        {
+            this.bookkeepingServiceRead = bookkeepingServiceRead;
+            this.bookkeepingServiceWrite = bookkeepingServiceWrite;
+        }
         #endregion
 
         #region GET Methods
@@ -52,7 +64,8 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         {
             try
             {
-                List<BookkeeperRead> bookkeeperReads= new List<BookkeeperRead>();
+                List<BookkeeperRead> bookkeeperReads= bookkeepingServiceRead.GetAllBookDetails();
+
                 return Ok(new ControllerResponse
                 {
                     Success = true,
@@ -77,7 +90,14 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         {
             try
             {
-                return Ok();
+                BookkeeperRead bookkeeperReads = bookkeepingServiceRead.GetBookDetailById();
+
+                return Ok(new ControllerResponse
+                {
+                    Success = true,
+                    StatusCode = Ok().StatusCode,
+                    ResponseObject = bookkeeperReads
+                });
             }
             catch (System.Exception ex)
             {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AjmeraPracticalAssessment.Service.Interface
 {
-    internal interface IBookkeepingServiceWrite
+    public interface IBookkeepingServiceWrite
     {
     }
 }
