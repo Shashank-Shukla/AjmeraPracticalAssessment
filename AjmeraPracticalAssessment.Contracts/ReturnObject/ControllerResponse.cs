@@ -6,8 +6,9 @@ namespace AjmeraPracticalAssessment.Contracts.ReturnObject
 {
     public class ControllerResponse
     {
-        public string Success { get; set; }
+        public bool Success { get; set; }
         public int StatusCode { get; set; }
+        public string ErrorMessage { get; set; } = string.Empty;
         public object ResponseObject { get; set; }
     }
 }

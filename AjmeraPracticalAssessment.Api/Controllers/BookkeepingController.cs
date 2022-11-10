@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AjmeraPracticalAssessment.Contracts.Read;
+using AjmeraPracticalAssessment.Contracts.ReturnObject;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -40,17 +42,33 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         //{
         //}
 
+        #region Private variables
+        //private ControllerResponse controllerResponse = null;
+        #endregion
+
+        #region GET Methods
         [HttpGet]
         public async Task<IActionResult> GetAllBooks()
         {
             try
             {
-                return Ok();
+                List<BookkeeperRead> bookkeeperReads= new List<BookkeeperRead>();
+                return Ok(new ControllerResponse
+                {
+                    Success = true,
+                    StatusCode = Ok().StatusCode,
+                    ResponseObject = bookkeeperReads
+                });
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-
-                throw;
+                return BadRequest(new ControllerResponse
+                {
+                    Success = false,
+                    StatusCode = BadRequest().StatusCode,
+                    ErrorMessage = ex.Message,
+                    ResponseObject = null
+                });
             }
         }
 
@@ -61,13 +79,21 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             {
                 return Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-
-                throw;
+                return BadRequest(new ControllerResponse
+                {
+                    Success = false,
+                    StatusCode = BadRequest().StatusCode,
+                    ErrorMessage = ex.Message,
+                    ResponseObject = null
+                });
             }
         }
+        #endregion
 
+
+        #region POST Method
         [HttpPost]
         public async Task<IActionResult> InsertBookDetails()
         {
@@ -75,13 +101,21 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             {
                 return Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-
-                throw;
+                return BadRequest(new ControllerResponse
+                {
+                    Success = false,
+                    StatusCode = BadRequest().StatusCode,
+                    ErrorMessage = ex.Message,
+                    ResponseObject = null
+                });
             }
         }
+        #endregion
 
+
+        #region PUT Method
         [HttpPut]
         public async Task<IActionResult> UpdateBookDetail()
         {
@@ -89,13 +123,21 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             {
                 return Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-
-                throw;
+                return BadRequest(new ControllerResponse
+                {
+                    Success = false,
+                    StatusCode = BadRequest().StatusCode,
+                    ErrorMessage = ex.Message,
+                    ResponseObject = null
+                });
             }
         }
+        #endregion
 
+
+        #region DELETE Method
         [HttpDelete]
         public async Task<IActionResult> DeleteBookByID()
         {
@@ -103,11 +145,17 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             {
                 return Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-
-                throw;
+                return BadRequest(new ControllerResponse
+                {
+                    Success = false,
+                    StatusCode = BadRequest().StatusCode,
+                    ErrorMessage = ex.Message,
+                    ResponseObject = null
+                });
             }
         }
+        #endregion
     }
 }
