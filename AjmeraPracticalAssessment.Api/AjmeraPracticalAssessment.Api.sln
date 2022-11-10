@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.Api", "AjmeraPracticalAssessment.Api.csproj", "{8535180E-91FB-4D65-9FB4-47310FD927A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.Contracts", "..\AjmeraPracticalAssessment.Contracts\AjmeraPracticalAssessment.Contracts.csproj", "{0802DF1E-B3D2-473E-AA99-E1458290210C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.Service", "..\AjmeraPracticalAssessment.Service\AjmeraPracticalAssessment.Service.csproj", "{59F7334F-B332-4FAE-B889-F17CEFD60548}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjmeraPracticalAssessment.Repository", "..\AjmeraPracticalAssessment.Repository\AjmeraPracticalAssessment.Repository.csproj", "{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8535180E-91FB-4D65-9FB4-47310FD927A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8535180E-91FB-4D65-9FB4-47310FD927A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8535180E-91FB-4D65-9FB4-47310FD927A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8535180E-91FB-4D65-9FB4-47310FD927A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0802DF1E-B3D2-473E-AA99-E1458290210C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0802DF1E-B3D2-473E-AA99-E1458290210C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0802DF1E-B3D2-473E-AA99-E1458290210C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0802DF1E-B3D2-473E-AA99-E1458290210C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F7334F-B332-4FAE-B889-F17CEFD60548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F7334F-B332-4FAE-B889-F17CEFD60548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F7334F-B332-4FAE-B889-F17CEFD60548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F7334F-B332-4FAE-B889-F17CEFD60548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57DE8753-DDC1-4EAF-B4F7-BB6B61DE09E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {258C4523-0046-4E02-BFF6-79A2206AA4AB}
+	EndGlobalSection
+EndGlobal
