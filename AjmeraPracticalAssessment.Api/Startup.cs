@@ -1,3 +1,7 @@
+using AjmeraPracticalAssessment.Repository;
+using AjmeraPracticalAssessment.Repository.Interface;
+using AjmeraPracticalAssessment.Service;
+using AjmeraPracticalAssessment.Service.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,13 +39,17 @@ namespace AjmeraPracticalAssessment.Api
                     Version = "v1",
                     Title = "Ajmera Infotech Practical",
                     Description = "Book Keeping Database",
-                    Contact =
+                    Contact = new OpenApiContact
                     {
                         Name = "Shashank Shukla",
-                        Email = "shashank.shukla.314159@gmail.com"
-                    }
+                        Email = "shashank.shukla.314159@gmail.com",
+                        Url = new Uri("https://github.com/Shashank-Shukla/AjmeraPracticalAssessment")
+                    },
                 });
             });
+            services.AddScoped<IBookkeepingServiceRead, BookkeepingServiceRead>()
+                    .AddScoped<IBookkeepingRepositoryRead, BookkeepingRepositoryRead>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
