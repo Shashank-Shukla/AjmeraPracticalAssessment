@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AjmeraPracticalAssessment.Service
 {
-    public class BookkeepingService
+    internal class BookkeepingServiceWrite
     {
     }
 }

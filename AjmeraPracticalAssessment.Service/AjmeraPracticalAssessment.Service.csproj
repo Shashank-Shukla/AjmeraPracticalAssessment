@@ -5,16 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="BookkeepingService.Read.cs" />
-    <Compile Remove="BookkeepingService.Write.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="BookkeepingService.Read.cs" />
-    <None Include="BookkeepingService.Write.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AjmeraPracticalAssessment.Contracts\AjmeraPracticalAssessment.Contracts.csproj" />
   </ItemGroup>
 

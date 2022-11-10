@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AjmeraPracticalAssessment.Api.Controllers
 {
@@ -40,11 +41,67 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         //}
 
         [HttpGet]
-        public IActionResult GetAllBooks()
+        public async Task<IActionResult> GetAllBooks()
         {
             try
             {
+                return Ok();
+            }
+            catch (System.Exception)
+            {
 
+                throw;
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBookByID(string id)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertBookDetails()
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateBookDetail()
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBookByID()
+        {
+            try
+            {
+                return Ok();
             }
             catch (System.Exception)
             {

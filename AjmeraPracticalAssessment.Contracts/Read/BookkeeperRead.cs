@@ -6,7 +6,7 @@ namespace AjmeraPracticalAssessment.Contracts.Read
 {
     public class BookkeeperRead
     {
-        public int BookId { get; set; }
+        public int BookID { get; set; }
         public string BookName { get; set; }
         public string AuthorName { get; set; }
     }
