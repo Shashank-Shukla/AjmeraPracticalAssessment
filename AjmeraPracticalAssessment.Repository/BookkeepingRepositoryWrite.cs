@@ -47,7 +47,7 @@ namespace AjmeraPracticalAssessment.Repository
         public async Task<bool> UpdateBookDetails(BookkeeperRead bookDetails)
         {
             // optimization: execute stored-procedure instead of query
-            string query = $"UPDATE {tableName} SET BookName = '{bookDetails.BookName}', AuthorName = '{bookDetails.AuthorName}' WHERE BookID = '{bookDetails.BookID}')";
+            string query = $"UPDATE {tableName} SET BookName = '{bookDetails.BookName}', AuthorName = '{bookDetails.AuthorName}' WHERE BookID = '{bookDetails.BookID}'";
             var response = await dbConnection.QueryAsync<bool>(query);
             bool res = false;
             if (response != null)
@@ -60,7 +60,7 @@ namespace AjmeraPracticalAssessment.Repository
         public async Task<bool> DeleteBookDetails(string id)
         {
             // optimization: Execute SP instead and before deleting store it in a seperate table for data retention.
-            string query = $"DELETE FROM {tableName} WHERE BookID = {id}";
+            string query = $"DELETE FROM {tableName} WHERE BookID = '{id}'";
             var response = await dbConnection.QueryAsync<bool>(query);
             bool res = false;
             if (response != null)

@@ -5,9 +5,12 @@ using AjmeraPracticalAssessment.HealthCheckAPI.Interface;
 using AjmeraPracticalAssessment.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace AjmeraPracticalAssessment.Api.Controllers
@@ -16,42 +19,11 @@ namespace AjmeraPracticalAssessment.Api.Controllers
     [ApiController]
     public class BookkeepingController : ControllerBase
     {
-        //// GET: api/<BookkeepingController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/<BookkeepingController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<BookkeepingController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<BookkeepingController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<BookkeepingController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
 
         #region Private variables
-        //private ControllerResponse controllerResponse = null;
         private IBookkeepingServiceRead bookkeepingServiceRead;
         private IBookkeepingServiceWrite bookkeepingServiceWrite;
+        private readonly ILogger<BookkeepingController> logger;
         private const string connectionStringName = "conn";
         #endregion
 
@@ -59,10 +31,12 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         public BookkeepingController(IBookkeepingServiceRead bookkeepingServiceRead, 
                                     IBookkeepingServiceWrite bookkeepingServiceWrite,
                                     ICheckDatabaseConnection checkDatabaseConnection,
+                                    ILogger<BookkeepingController> logger,
                                     IConfiguration configuration)
         {
             this.bookkeepingServiceRead = bookkeepingServiceRead;
             this.bookkeepingServiceWrite = bookkeepingServiceWrite;
+            this.logger = logger;
             checkDatabaseConnection.CheckDatabaseHealth(configuration.GetConnectionString(connectionStringName),
                                                         configuration.GetSection("HealthChecks:TableNames").Value.Split(',').ToList());
         }
@@ -75,7 +49,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             try
             {
                 List<BookkeeperRead> bookkeeperReads= await bookkeepingServiceRead.GetAllBookDetails();
-
+                logger.LogDebug($"{nameof(GetAllBooks)} Ok");
                 return Ok(new ControllerResponse
                 {
                     Success = true,
@@ -85,6 +59,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             }
             catch (System.Exception ex)
             {
+                logger.LogError(ex.Message);
                 return BadRequest(new ControllerResponse
                 {
                     Success = false,
@@ -101,7 +76,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             try
             {
                 BookkeeperWrite bookkeeperReads = await bookkeepingServiceRead.GetBookDetailById(id);
-
+                logger.LogDebug($"{nameof(GetBookByID)} Ok");
                 return Ok(new ControllerResponse
                 {
                     Success = true,
@@ -111,6 +86,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             }
             catch (System.Exception ex)
             {
+                logger.LogError(ex.Message);
                 return BadRequest(new ControllerResponse
                 {
                     Success = false,
@@ -130,6 +106,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             try
             {
                 string responseID = await bookkeepingServiceWrite.InsertBookDetails(bookInput);
+                logger.LogDebug($"{nameof(InsertBookDetails)} Ok");
                 return Ok(new ControllerResponse
                 {
                     Success = true,
@@ -139,6 +116,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             }
             catch (System.Exception ex)
             {
+                logger.LogError(ex.Message);
                 return BadRequest(new ControllerResponse
                 {
                     Success = false,
@@ -163,6 +141,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
                 {
                     res = "Update Successful!";
                 }
+                logger.LogDebug($"{nameof(UpdateBookDetail)} Ok");
                 return Ok(new ControllerResponse
                 {
                     Success = true,
@@ -172,6 +151,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             }
             catch (System.Exception ex)
             {
+                logger.LogError(ex.Message);
                 return BadRequest(new ControllerResponse
                 {
                     Success = false,
@@ -196,6 +176,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
                 {
                     res = "Delete Successful!";
                 }
+                logger.LogDebug($"{nameof(DeleteBookByID)} Ok");
                 return Ok(new ControllerResponse
                 {
                     Success = true,
@@ -205,6 +186,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             }
             catch (System.Exception ex)
             {
+                logger.LogError(ex.Message );
                 return BadRequest(new ControllerResponse
                 {
                     Success = false,
