@@ -47,14 +47,14 @@ namespace AjmeraPracticalAssessment.HealthCheckAPI
         {
             try
             {
-                string query = $"SELECT TOP 1 * FROM {tableName}";
+                string query = $"IF OBJECT_ID('{tableName}', 'U') IS NOT NULL SELECT 1 ELSE SELECT 0";
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(query, con);
                     sqlCommand.Connection.Open();
-                    var res = sqlCommand.ExecuteNonQuery();
-                    if (res != 0) 
-                    { 
+                    var res = (int)sqlCommand.ExecuteScalar();
+                    if (res == 1) 
+                    {
                         return true; 
                     }
                     else
@@ -71,6 +71,7 @@ namespace AjmeraPracticalAssessment.HealthCheckAPI
 
         private async void CreateTable(string connectionString, string tableName)
         {
+            // Optimization: Execute the CreateTable stored-procedure instead
             string query = @$"CREATE TABLE {tableName} (
                                 BookID UNIQUEIDENTIFIER PRIMARY KEY default NEWID(),
                                 BookName VARCHAR(50) NOT NULL,

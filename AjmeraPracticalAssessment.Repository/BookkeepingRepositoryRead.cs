@@ -1,4 +1,5 @@
 ﻿using AjmeraPracticalAssessment.Contracts.Read;
+using AjmeraPracticalAssessment.Contracts.Write;
 using AjmeraPracticalAssessment.Repository.Interface;
 using Dapper;
 using Microsoft.Extensions.Configuration;
@@ -33,15 +34,28 @@ namespace AjmeraPracticalAssessment.Repository
         #region Public Methods
         public async Task<List<BookkeeperRead>> GetAllBookDetails()
         {
-            string query = "select BookID, BookName, Author from BookKeeping";
-            List<BookkeeperRead> response = (await dbConnection.QueryAsync<BookkeeperRead>(query)).ToList();
+            // optimization: execute stored-procedure instead of query
+            string query = "select BookID, BookName, AuthorName from BookKeeping";
+            var res = (await dbConnection.QueryAsync<BookDetailsWriteResponse>(query)).ToList();
+            //List<BookkeeperRead> response = (await dbConnection.QueryAsync<BookkeeperRead>(query)).ToList();
+            List<BookkeeperRead> response = new List<BookkeeperRead>();
+            foreach (var r in res)
+            {
+                response.Add(new BookkeeperRead
+                {
+                    BookID = r.BookID.ToString(),
+                    BookName = r.BookName.ToString(),
+                    AuthorName = r.AuthorName.ToString(),
+                });
+            }
             return response;
         }
 
-        public async Task<BookkeeperRead> GetBookDetailById(string id)
+        public async Task<BookkeeperWrite> GetBookDetailById(string id)
         {
-            string query = $"select BookID, BookName, Author from BookKeeping where id = {id}";
-            BookkeeperRead response = (await dbConnection.QueryAsync<BookkeeperRead>(query)).FirstOrDefault();
+            // optimization: execute stored-procedure instead of query
+            string query = $"select BookName, AuthorName from BookKeeping where BookID = '{id}'";
+            BookkeeperWrite response = (await dbConnection.QueryAsync<BookkeeperWrite>(query)).FirstOrDefault();
             return response;
         }
         #endregion

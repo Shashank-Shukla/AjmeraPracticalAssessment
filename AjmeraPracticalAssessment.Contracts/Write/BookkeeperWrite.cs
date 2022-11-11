@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AjmeraPracticalAssessment.Contracts.Read
+namespace AjmeraPracticalAssessment.Contracts.Write
 {
-    public class BookkeeperRead
+    public class BookkeeperWrite
     {
-        public string BookID { get; set; }
         public string BookName { get; set; }
         public string AuthorName { get; set; }
     }

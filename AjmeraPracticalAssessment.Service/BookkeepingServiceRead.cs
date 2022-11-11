@@ -1,4 +1,5 @@
 ﻿using AjmeraPracticalAssessment.Contracts.Read;
+using AjmeraPracticalAssessment.Contracts.Write;
 using AjmeraPracticalAssessment.Repository.Interface;
 using AjmeraPracticalAssessment.Service.Interface;
 using System;
@@ -48,11 +49,11 @@ namespace AjmeraPracticalAssessment.Service
         /// </summary>
         /// <returns>BookkeeperRead object</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<BookkeeperRead> GetBookDetailById(string id)
+        public async Task<BookkeeperWrite> GetBookDetailById(string id)
         {
             try
             {
-                BookkeeperRead repoResponse = await bookkeepingRepositoryRead.GetBookDetailById(id);
+                BookkeeperWrite repoResponse = await bookkeepingRepositoryRead.GetBookDetailById(id);
                 repoResponse = FilterRepoResponse(repoResponse);
                 return repoResponse;
             }
@@ -82,7 +83,7 @@ namespace AjmeraPracticalAssessment.Service
             return repoResponse;
         }
 
-        private BookkeeperRead FilterRepoResponse(BookkeeperRead repoResponse)
+        private BookkeeperWrite FilterRepoResponse(BookkeeperWrite repoResponse)
         {
             if (string.IsNullOrEmpty(repoResponse.BookName))
             {

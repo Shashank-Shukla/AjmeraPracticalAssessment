@@ -1,5 +1,6 @@
 ﻿using AjmeraPracticalAssessment.Contracts.Read;
 using AjmeraPracticalAssessment.Contracts.ReturnObject;
+using AjmeraPracticalAssessment.Contracts.Write;
 using AjmeraPracticalAssessment.HealthCheckAPI.Interface;
 using AjmeraPracticalAssessment.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -99,7 +100,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         {
             try
             {
-                BookkeeperRead bookkeeperReads = await bookkeepingServiceRead.GetBookDetailById(id);
+                BookkeeperWrite bookkeeperReads = await bookkeepingServiceRead.GetBookDetailById(id);
 
                 return Ok(new ControllerResponse
                 {
@@ -124,11 +125,17 @@ namespace AjmeraPracticalAssessment.Api.Controllers
 
         #region POST Method
         [HttpPost]
-        public async Task<IActionResult> InsertBookDetails()
+        public async Task<IActionResult> InsertBookDetails([FromBody] BookkeeperWrite bookInput)
         {
             try
             {
-                return Ok();
+                string responseID = await bookkeepingServiceWrite.InsertBookDetails(bookInput);
+                return Ok(new ControllerResponse
+                {
+                    Success = true,
+                    StatusCode = Ok().StatusCode,
+                    ResponseObject = responseID
+                });
             }
             catch (System.Exception ex)
             {
@@ -145,12 +152,23 @@ namespace AjmeraPracticalAssessment.Api.Controllers
 
 
         #region PUT Method
-        [HttpPut]
-        public async Task<IActionResult> UpdateBookDetail()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBookDetail(string id, [FromBody] BookkeeperWrite bookInput)
         {
+            string res = "Update failed!";
             try
             {
-                return Ok();
+                bool response = await bookkeepingServiceWrite.UpdateBookDetails(id, bookInput);
+                if (response) 
+                {
+                    res = "Update Successful!";
+                }
+                return Ok(new ControllerResponse
+                {
+                    Success = true,
+                    StatusCode = Ok().StatusCode,
+                    ResponseObject = res
+                });
             }
             catch (System.Exception ex)
             {
@@ -159,7 +177,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
                     Success = false,
                     StatusCode = BadRequest().StatusCode,
                     ErrorMessage = ex.Message,
-                    ResponseObject = null
+                    ResponseObject = res
                 });
             }
         }
@@ -167,12 +185,23 @@ namespace AjmeraPracticalAssessment.Api.Controllers
 
 
         #region DELETE Method
-        [HttpDelete]
-        public async Task<IActionResult> DeleteBookByID()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBookByID(string id)
         {
+            string res = "Delete failed!";
             try
             {
-                return Ok();
+                bool response = await bookkeepingServiceWrite.DeleteBookDetails(id);
+                if (response)
+                {
+                    res = "Delete Successful!";
+                }
+                return Ok(new ControllerResponse
+                {
+                    Success = true,
+                    StatusCode = Ok().StatusCode,
+                    ResponseObject = res
+                });
             }
             catch (System.Exception ex)
             {
@@ -181,7 +210,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
                     Success = false,
                     StatusCode = BadRequest().StatusCode,
                     ErrorMessage = ex.Message,
-                    ResponseObject = null
+                    ResponseObject = res
                 });
             }
         }
