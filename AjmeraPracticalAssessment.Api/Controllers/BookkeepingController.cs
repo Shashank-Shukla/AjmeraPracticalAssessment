@@ -1,8 +1,12 @@
 ﻿using AjmeraPracticalAssessment.Contracts.Read;
 using AjmeraPracticalAssessment.Contracts.ReturnObject;
+using AjmeraPracticalAssessment.HealthCheckAPI.Interface;
 using AjmeraPracticalAssessment.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AjmeraPracticalAssessment.Api.Controllers
@@ -47,14 +51,19 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         //private ControllerResponse controllerResponse = null;
         private IBookkeepingServiceRead bookkeepingServiceRead;
         private IBookkeepingServiceWrite bookkeepingServiceWrite;
+        private const string connectionStringName = "conn";
         #endregion
 
         #region Constructor
         public BookkeepingController(IBookkeepingServiceRead bookkeepingServiceRead, 
-                                    IBookkeepingServiceWrite bookkeepingServiceWrite)
+                                    IBookkeepingServiceWrite bookkeepingServiceWrite,
+                                    ICheckDatabaseConnection checkDatabaseConnection,
+                                    IConfiguration configuration)
         {
             this.bookkeepingServiceRead = bookkeepingServiceRead;
             this.bookkeepingServiceWrite = bookkeepingServiceWrite;
+            checkDatabaseConnection.CheckDatabaseHealth(configuration.GetConnectionString(connectionStringName),
+                                                        configuration.GetSection("HealthChecks:TableNames").Value.Split(',').ToList());
         }
         #endregion
 
@@ -64,7 +73,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         {
             try
             {
-                List<BookkeeperRead> bookkeeperReads= bookkeepingServiceRead.GetAllBookDetails();
+                List<BookkeeperRead> bookkeeperReads= await bookkeepingServiceRead.GetAllBookDetails();
 
                 return Ok(new ControllerResponse
                 {
@@ -90,7 +99,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
         {
             try
             {
-                BookkeeperRead bookkeeperReads = bookkeepingServiceRead.GetBookDetailById(id);
+                BookkeeperRead bookkeeperReads = await bookkeepingServiceRead.GetBookDetailById(id);
 
                 return Ok(new ControllerResponse
                 {

@@ -1,19 +1,29 @@
-﻿using System;
+﻿using AjmeraPracticalAssessment.HealthCheckAPI.Interface;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace AjmeraPracticalAssessment.HealthCheckAPI
 {
-    public class CheckDatabaseConnection
+    public class CheckDatabaseConnection : ICheckDatabaseConnection
     {
-		public CheckDatabaseConnection(string connectionString, string tableName) 
+		public async Task CheckDatabaseHealth(string connectionString, List<string> tableNames) 
 		{
-			if (!IsServerConnected(connectionString))
-			{
-				// Call a service to create connection
-			}
-            if (!IsTableCreated(connectionString, tableName))
+            if (!IsServerConnected(connectionString))
             {
-                // Call a service to create table
+                // Call a service to create connection
+            }
+            foreach (string tableName in tableNames) 
+            {
+                if (string.IsNullOrEmpty(tableName)) continue;
+                if (!IsTableCreated(connectionString, tableName))
+                {
+                    // Call a service to create table
+                    CreateTable(connectionString, tableName);
+                    // Needs optimization
+                }
             }
         }
 
@@ -37,7 +47,7 @@ namespace AjmeraPracticalAssessment.HealthCheckAPI
         {
             try
             {
-                string query = $"SELECT TOP(1) FROM " + tableName;
+                string query = $"SELECT TOP 1 * FROM {tableName}";
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(query, con);
@@ -56,6 +66,21 @@ namespace AjmeraPracticalAssessment.HealthCheckAPI
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        private async void CreateTable(string connectionString, string tableName)
+        {
+            string query = @$"CREATE TABLE {tableName} (
+                                BookID UNIQUEIDENTIFIER PRIMARY KEY default NEWID(),
+                                BookName VARCHAR(50) NOT NULL,
+                                AuthorName VARCHAR(50) NOT NULL );";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, con);
+                sqlCommand.Connection.Open();
+                await sqlCommand.ExecuteNonQueryAsync();
+                sqlCommand.Connection.Close();
             }
         }
     }

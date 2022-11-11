@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AjmeraPracticalAssessment.Service.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AjmeraPracticalAssessment.Service
 {
-    internal class BookkeepingServiceWrite
+    public class BookkeepingServiceWrite : IBookkeepingServiceWrite
     {
     }
 }

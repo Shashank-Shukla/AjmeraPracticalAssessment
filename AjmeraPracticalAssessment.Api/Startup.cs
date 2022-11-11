@@ -1,3 +1,5 @@
+using AjmeraPracticalAssessment.HealthCheckAPI;
+using AjmeraPracticalAssessment.HealthCheckAPI.Interface;
 using AjmeraPracticalAssessment.Repository;
 using AjmeraPracticalAssessment.Repository.Interface;
 using AjmeraPracticalAssessment.Service;
@@ -47,9 +49,11 @@ namespace AjmeraPracticalAssessment.Api
                     },
                 });
             });
-            services.AddScoped<IBookkeepingServiceRead, BookkeepingServiceRead>()
-                    .AddScoped<IBookkeepingRepositoryRead, BookkeepingRepositoryRead>();
-
+            services.AddScoped<IBookkeepingServiceRead, BookkeepingServiceRead>();
+            services.AddScoped<IBookkeepingRepositoryRead, BookkeepingRepositoryRead>();
+            services.AddScoped<IBookkeepingServiceWrite, BookkeepingServiceWrite>();
+            services.AddScoped<IBookkeepingRepositoryWrite, BookkeepingRepositoryWrite>();
+            services.AddScoped<ICheckDatabaseConnection, CheckDatabaseConnection>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

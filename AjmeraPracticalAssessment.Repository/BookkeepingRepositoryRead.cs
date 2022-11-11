@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AjmeraPracticalAssessment.Repository
 {
@@ -30,17 +31,17 @@ namespace AjmeraPracticalAssessment.Repository
         #endregion
 
         #region Public Methods
-        public List<BookkeeperRead> GetAllBookDetails()
+        public async Task<List<BookkeeperRead>> GetAllBookDetails()
         {
             string query = "select BookID, BookName, Author from BookKeeping";
-            List<BookkeeperRead> response = (dbConnection.Query<BookkeeperRead>(query)).ToList();
+            List<BookkeeperRead> response = (await dbConnection.QueryAsync<BookkeeperRead>(query)).ToList();
             return response;
         }
 
-        public BookkeeperRead GetBookDetailById(string id)
+        public async Task<BookkeeperRead> GetBookDetailById(string id)
         {
             string query = $"select BookID, BookName, Author from BookKeeping where id = {id}";
-            BookkeeperRead response = dbConnection.Query<BookkeeperRead>(query).FirstOrDefault();
+            BookkeeperRead response = (await dbConnection.QueryAsync<BookkeeperRead>(query)).FirstOrDefault();
             return response;
         }
         #endregion

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AjmeraPracticalAssessment.Service
 {
@@ -27,11 +28,11 @@ namespace AjmeraPracticalAssessment.Service
         /// </summary>
         /// <returns>List of BookkeeperRead object</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<BookkeeperRead> GetAllBookDetails()
+        public async Task<List<BookkeeperRead>> GetAllBookDetails()
         {
             try
             {
-                List<BookkeeperRead> repoResponse = bookkeepingRepositoryRead.GetAllBookDetails();
+                List<BookkeeperRead> repoResponse = await bookkeepingRepositoryRead.GetAllBookDetails();
                 repoResponse = FilterRepoResponse(repoResponse);
                 return repoResponse;
             }
@@ -47,11 +48,11 @@ namespace AjmeraPracticalAssessment.Service
         /// </summary>
         /// <returns>BookkeeperRead object</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public BookkeeperRead GetBookDetailById(string id)
+        public async Task<BookkeeperRead> GetBookDetailById(string id)
         {
             try
             {
-                BookkeeperRead repoResponse = bookkeepingRepositoryRead.GetBookDetailById(id);
+                BookkeeperRead repoResponse = await bookkeepingRepositoryRead.GetBookDetailById(id);
                 repoResponse = FilterRepoResponse(repoResponse);
                 return repoResponse;
             }

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AjmeraPracticalAssessment.Contracts\AjmeraPracticalAssessment.Contracts.csproj" />
+    <ProjectReference Include="..\AjmeraPracticalAssessment.HealthCheckAPI\AjmeraPracticalAssessment.HealthCheckAPI.csproj" />
     <ProjectReference Include="..\AjmeraPracticalAssessment.Service\AjmeraPracticalAssessment.Service.csproj" />
   </ItemGroup>
 
