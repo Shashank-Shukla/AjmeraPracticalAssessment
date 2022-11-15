@@ -83,6 +83,7 @@ namespace AjmeraPracticalAssessment.Api.Controllers
                     {
                         Success = false,
                         StatusCode = NotFound().StatusCode,
+                        ErrorMessage = $"{id} not found",
                         ResponseObject = bookkeeperReads
                     });
                 }
