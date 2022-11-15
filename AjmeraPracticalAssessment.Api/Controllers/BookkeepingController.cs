@@ -76,6 +76,16 @@ namespace AjmeraPracticalAssessment.Api.Controllers
             try
             {
                 BookkeeperWrite bookkeeperReads = await bookkeepingServiceRead.GetBookDetailById(id);
+                if (bookkeeperReads == null)
+                {
+                    logger.LogDebug($"{nameof(GetBookByID)}: Object not found for id = {id}");
+                    return NotFound(new ControllerResponse
+                    {
+                        Success = false,
+                        StatusCode = NotFound().StatusCode,
+                        ResponseObject = bookkeeperReads
+                    });
+                }
                 logger.LogDebug($"{nameof(GetBookByID)} Ok");
                 return Ok(new ControllerResponse
                 {

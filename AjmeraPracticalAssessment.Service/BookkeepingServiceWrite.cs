@@ -48,7 +48,7 @@ namespace AjmeraPracticalAssessment.Service
             try
             {
                 BookkeeperWrite readExistingData = await bookkeepingServiceRead.GetBookDetailById(id);
-                bookDetails = SanitizeInputs(bookDetails, readExistingData);
+                bookDetails = readExistingData == null ? SanitizeInputs(bookDetails) : SanitizeInputs(bookDetails, readExistingData);
                 // optimization: use mapping service to map 2 data models
                 BookkeeperRead bookUpdate = new BookkeeperRead
                 {
