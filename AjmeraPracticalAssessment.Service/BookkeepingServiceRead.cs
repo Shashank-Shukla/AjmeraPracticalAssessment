@@ -54,7 +54,10 @@ namespace AjmeraPracticalAssessment.Service
             try
             {
                 BookkeeperWrite repoResponse = await bookkeepingRepositoryRead.GetBookDetailById(id);
-                repoResponse = FilterRepoResponse(repoResponse);
+                if (repoResponse != null)
+                {
+                    repoResponse = FilterRepoResponse(repoResponse);
+                }
                 return repoResponse;
             }
             catch (Exception ex)
